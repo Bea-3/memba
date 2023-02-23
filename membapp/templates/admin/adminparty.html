@@ -1,0 +1,43 @@
+{% extends "admin/index.html" %}
+            {% block nav%}
+            <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
+                <div class="d-flex align-items-center">
+                    <i class="fas fa-align-left primary-text fs-4 me-3" id="menu-toggle"></i>
+                    <h2 class="fs-2 m-0" style="color: #008753;">Party</h2>
+                </div>
+            </nav>
+            {% endblock %}
+
+            {% block content %}
+            <div class="row"  >
+                <div>
+                    <h4>Add Party</h4>
+                </div>
+                <div class="col-md-5">
+                    <form method="post" action="">
+                        <div class=" mb-3">
+                            <input type="text" name="partyname" class="form-control" placeholder="Name">
+                        </div>
+                
+                        <div class=" mb-3">
+                            
+                            <input type="text" name="partycode" class="form-control" placeholder="Shortcode">
+                            
+                        </div>
+
+                        <div class=" mb-3">
+                            
+                            <input type="text" name="partycontact" class="form-control" placeholder="Contact">
+                        </div>
+                        
+                
+                        <div class="col-6 text-center">
+                            <button class="btn btn-warning">Add</button>
+                        </div> 
+                
+                        </form>
+                </div>
+                    
+                
+            </div>
+            {% endblock content %}

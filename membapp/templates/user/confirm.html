@@ -1,0 +1,19 @@
+{% extends "user/home_layout.html"%}
+  
+{% block content %}
+<div class="content" style="background-color: white;padding:3em">
+  <h3>Donation Confirmation Page</h3>
+  <p>Thank you for choosing to donate to membapp.</p>
+  <p>Please confirm your donation details as follows:</p>
+    <p>Name of Donor: {{donor.don_donor}}</p>
+    <p>Amount: {{donor.don_amt}}</p>
+    <p class="text-danger"><i>Please take note of your reference no</i></p>
+    <p>Reference Number: {{ refno }}</p>
+    <form method="post" action="/confirm">
+        <input type="hidden" name="csrf_token" id="csrf_token" value="{{csrf_token()}}"> 
+        <a class="btn btn-lg btn-danger" href="/donate">Sorry, I changed my mind</a>
+        <button class="btn btn-lg btn-warning">Confirm and Make Payment</button>
+    </form>
+ </div>
+ 
+{% endblock %}

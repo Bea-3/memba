@@ -1,0 +1,62 @@
+{% extends "user/home_layout.html" %}
+
+{% block content %}
+  <div class="content" style="background-color: white; padding:3em">
+    
+    <div class="row g-5">
+    <div class="col">
+      <h3 class="pb-4 mb-4 fst-italic border-bottom">
+        Contact Us 
+      </h3>
+      {% with c = get_flashed_messages() %}
+        {% for msg in c %}
+          <p class="alert alert-success">{{ msg }}</p>
+        {% endfor %}
+      {% endwith %}
+      <form action="", method="post" novalidate>
+        {{ contact.csrf_token }}
+         
+        {{contact.screenshot}} 
+        {{contact.screenshot.errors}}
+        {{contact.confirm_email}}
+        {{contact.confirm_email.errors}}
+        <div class="form-group mb-3 row g-3">
+            {{contact.email.label(class_='col-md-2')}}
+            <div class="col-md-6">
+                {{ contact.email(class_='form-control border-success')}}
+            </div>
+            {% if contact.email.errors %}
+              {% for email_error in contact.email.errors %}
+              <div class="col-auto mb-4"><span class="alert alert-danger">{{ email_error}}</span></div>
+              {% endfor %}
+            {% endif %}
+        </div>
+        <div class="form-group mb-3 row g-3">
+            {{contact.message.label(class_='col-md-2')}}
+            <div class="col-md-6">
+                {{ contact.message(class_='form-control border-success')}}
+            </div>
+            {% if contact.message.errors %}
+              {% for message_error in contact.message.errors %}
+              <div class="col-auto"><span class="alert alert-danger">{{ message_error}}</span></div>
+              {% endfor %}
+            {% endif %}
+        </div>
+        <div class="form-group mb-3 row text-end">
+            <div class="col-md-6">
+                {{ contact.submit(class_='btn btn-success')}}
+            </div>
+        </div>
+      </form>
+
+ 
+
+    </div>
+
+   
+  </div>
+
+
+
+  </div>
+{% endblock %}

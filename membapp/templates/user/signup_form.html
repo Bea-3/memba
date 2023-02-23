@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='bootstrap/css/bootstrap.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/index.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='fontawesome/css/all.min.css')}}">
+    <script type="text/javascript" defer src="{{url_for('static',filename='bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+    <title>Signup Form</title>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-6 offset-3" style="border:2px solid black">
+                <h2>User Sign Up</h2>
+                <form action="" method="post">
+                    <div class="row mb-3">
+                        <div class="col-2"><label class="col-form-label">Name:</label></div>
+                        <div class="col-6"><input type="text" name="fullname" id="fullname" class="form-control border-info"></div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-2"><label class="col-form-label">Email:</label></div>
+                        <div class="col-6"><input type="email" name="email" id="email" class="form-control border-info"></div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-2"><label class="col-form-label">Password:</label></div>
+                        <div class="col-6"><input type="password" name="password" id="pwd" class="form-control border-info"></div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-2"><label class="col-form-label">Party</label></div>
+                        <div class="col-6">
+                           <select name="userparty" class="form-select border-info">
+                                {% for p in data %}
+                                <option>{{p.party_name}}</option>
+                                {% endfor %}
+                           </select>
+                        </div>
+                    </div>
+                    <div class="row justify-content-evenly mb-3">
+                        <div class="col-5">
+                            <button class="btn btn-success">Register</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+

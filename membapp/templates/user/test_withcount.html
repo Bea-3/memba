@@ -1,0 +1,35 @@
+{% extends "user/home_layout.html"%}
+  
+{% block content %}
+<div class="content" style="background-color: white;padding:3em">
+    {{data}}
+ {#{% for p,d in data %}
+<p> The fullname is : {{ p.user_fullname }} and the party is: {{d.party_name}}</p>
+ {% endfor %}#}
+
+ {#{% for d in data %}
+<p>The fullname is:{{ d[0] }} and the party is:{{d[1]}}</p>
+ {% endfor %}#}
+
+ <p>There are {#{{ data.users|count }}member with name {{ data.users[0].user_fullname}}#}</p> 
+
+ <p>{{ data.party_deets.party_name }}</p>
+
+ <table class="table">
+    <thead>
+        <tr>
+            <th>Serial</th>
+            <th>Party Name</th>
+            <th>Total Members</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>loop.index</td>
+            <td>{{ data.users[0]}}</td>
+            
+        </tr>
+    </tbody>
+ </table>
+ </div>
+{% endblock %}

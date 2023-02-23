@@ -1,0 +1,27 @@
+{% extends "user/home_layout.html" %}
+{% block content %}
+<div class="col-10 offset-1 text-center mt-3" style="background-color: white; padding:3em ; min-height: 300px;">
+    <h4 class="mb-4">Donation Page </h4>
+    
+    <form action="{{url_for('donate')}}" method="POST">
+        <input type="hidden" name="csrf_token" id="csrf_token" value="{{csrf_token()}}"> 
+
+        <div class="row form-group mb-3">
+            <label class="col-md-3">Full Name :</label>
+            <div class="col-md-6">
+                <input type="text" name="fullname" value="{% if deets: %} {{deets.user_fullname}}{% endif%}" class="form-control border-success">
+            </div>
+        </div>
+        <div class="row form-group mb-3">
+            <label class="col-md-3">Donation Amount</label>
+            <div class="col-md-6">
+                <input type="text" name="amount" class="form-control border-success">
+            </div>
+        </div>
+        <div class="col-12 form-group text-center mt-5">
+            <button type="submit" class="btn btn-warning w-50">Donate!</button>
+        </div>
+    </form>
+</div>
+{% endblock %}
+

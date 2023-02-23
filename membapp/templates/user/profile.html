@@ -1,0 +1,102 @@
+{% extends "user/home_layout.html"%}
+  
+{% block content %}
+<div class="content" style="background-color: white;padding:3em">
+    <h3>My Profile</h3>
+    <form action="{{url_for('user_profile')}}" method="post">
+        {% with m=get_flashed_messages() %}
+    {% if m %}
+      {% for msg in m%}
+        <div class="alert alert-success">{{ msg }}</div>
+      {% endfor %}
+    {% endif %}
+    {% endwith %}
+    <input type="hidden" name="csrf_token" id="csrf_token" value="{{csrf_token()}}">
+    <div class="form-group row mb-3">
+        <label class="col-md-3">Party</label>
+        <div class="col-md-6">
+            <select name="party" id="party" class="form-select border-success">
+                {% for p in allparties %}
+                    {% if p.party_id == deets.user_partyid %}
+                    <option value="{{p.party_id}}" selected>{{p.party_name}}</option>
+                    {% else %}
+                    <option value="{{p.party_id}}">{{p.party_name}}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+
+        <div class="form-group row mb-3">
+            <label class="col-md-3">Fullname</label>
+            <div class="col-md-6">
+                <input type="text" value="{{ deets.user_fullname}}" class="form-control border-success" name="fullname">
+            </div>
+        </div>
+        <div class="form-group row mb-3">
+            <label class="col-md-3">Email</label>
+            <div class="col-md-6">
+                {{ deets.user_email}}
+            </div>
+        </div>
+        <div class="form-group row mb-3">
+            <label class="col-md-3">Phone</label>
+            <div class="col-md-6">
+                <input type="text" value="{{ deets.user_phone}}" class="form-control border-success" name="phone">
+            </div>
+        </div>
+        <div class="form-group row mb-3">
+            <label class="col-md-3">State of Residence</label>
+            <div class="col-md-6">
+                <select name="state" id="state" class="form-select border-success">
+                    <option value="">Please Select</option>
+                    {% for x in allstates%}
+                    <option value="{{x.state_id}}">
+                        {{x.state_name}}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="form-group row mb-3">
+            <label class="col-md-3">Local Government Area</label>
+            <div class="col-md-6" id="mylga">
+                
+            </div>
+        </div>
+    
+        <div class="col-md-9 text-center">
+            <input type="submit" class="btn btn-warning" value="Update Record">
+        </div>
+
+    </form>
+  </div>
+ 
+{% endblock %}
+<select  name="lga" id="lga" class="form-select border-info">
+    <option>Choose l.g.a</option>
+    {% for loc in ldata %}
+    <option value="{{loc.lga_id}}">{{loc.lga_name}}</option>
+    {% endfor %}
+  </select>
+{% block customjs %}
+<script>
+    $(document).ready(function(){
+        $('#state').change(function(){
+            var stateid = $(this).val()
+            var csrf = "{{csrf_token}}"
+            $.ajax({
+                url:"/load_lga/"+stateid,
+                
+                type:"GET",
+                success:function(rsp){
+                    $('#mylga').html(rsp)
+                },
+                error:function(err){
+                    console.log(err)
+                }
+            })
+        })
+    })
+</script>
+{% endblock %}
